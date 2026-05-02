@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    postio (0.1.0)
+    postio (0.1.1)
 
 GEM
   remote: https://rubygems.org/
