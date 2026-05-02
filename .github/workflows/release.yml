@@ -15,7 +15,7 @@ jobs:
       name: rubygems
       url: https://rubygems.org/gems/postio
     permissions:
-      contents: write   # rubygems/release-gem creates a GH release
+      contents: read
       id-token: write   # Trusted Publishers (OIDC)
     steps:
       - uses: actions/checkout@v4
@@ -38,5 +38,23 @@ jobs:
       - name: Run offline tests
         run: bundle exec rspec
 
-      - name: Release gem (Trusted Publishers)
-        uses: rubygems/release-gem@v1
+      - name: Configure Trusted Publisher (exchange GH OIDC for RubyGems token)
+        uses: rubygems/configure-rubygems-credentials@main
+
+      - name: Build gem
+        run: gem build postio.gemspec
+
+      - name: Skip if version already on RubyGems (idempotent)
+        id: check
+        run: |
+          VERSION=$(ruby -r ./lib/postio/version -e "puts Postio::VERSION")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://rubygems.org/api/v1/versions/postio.json")
+          if [ "$STATUS" = "200" ] && curl -s "https://rubygems.org/api/v1/versions/postio.json" | grep -q "\"number\":\"$VERSION\""; then
+            echo "already-published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already-published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push gem to RubyGems
+        if: steps.check.outputs.already-published == 'false'
+        run: gem push postio-*.gem
