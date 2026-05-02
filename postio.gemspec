@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "Ruby client for the Postio API. UK address, email, and phone validation backed by Royal Mail PAF and Ordnance Survey. Stdlib net/http, no external runtime dependencies."
   spec.homepage    = "https://postio.co.uk"
   spec.license     = "MIT"
-  spec.required_ruby_version = ">= 3.1"
+  spec.required_ruby_version = ">= 3.2"
 
   spec.metadata = {
     "homepage_uri"      => "https://postio.co.uk",

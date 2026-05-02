@@ -5,7 +5,7 @@ ergonomics.
 
 ## Stack
 
-- **Ruby 3.1+** (3.2+ for `Data.define`, used everywhere in `models.rb`).
+- **Ruby 3.2+** required (uses `Data.define` everywhere in `models.rb`).
 - **HTTP**: stdlib `net/http`. Zero runtime gems.
 - **Tests**: RSpec 3 + WebMock. Live tests in `spec/live_spec.rb`,
   excluded from default rspec via `.rspec` config; CI opts in.
@@ -28,8 +28,8 @@ postio-ruby/
 │   ├── client_spec.rb      offline (WebMock-mocked)
 │   └── live_spec.rb         live (skipped by default; CI opts in)
 └── .github/workflows/
-    ├── ci.yml              rspec matrix on Ruby 3.1/3.2/3.3
-    └── release.yml         tag-driven; OIDC trusted publishing on RubyGems
+    ├── ci.yml              rspec matrix on Ruby 3.2/3.3
+    └── release.yml         tag-driven; rubygems/release-gem + OIDC TP
 ```
 
 ## Common commands

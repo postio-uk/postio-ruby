@@ -1,7 +1,6 @@
 *.gem
 .bundle/
 vendor/bundle/
-Gemfile.lock
 .rspec_status
 coverage/
 .byebug_history
