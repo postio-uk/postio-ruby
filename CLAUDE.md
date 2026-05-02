@@ -1,7 +1,12 @@
-# postio-ruby — Claude Code working notes
+# postio-ruby — development notes
 
-Ruby SDK for `postio-api`. Mirrors `@postio/core` with idiomatic Ruby
-ergonomics.
+Ruby SDK for the [Postio API](https://postio.co.uk). Mirrors `@postio/core`
+(the JS family's runtime client) with idiomatic Ruby ergonomics. Lives
+in its own repo because Ruby's gem toolchain doesn't co-exist with the
+JS-family pnpm workspace.
+
+Read [`README.md`](./README.md) for the customer-facing surface; this
+file is the operational guide for contributors and code agents.
 
 ## Stack
 
@@ -70,6 +75,3 @@ string. Reapply if model is regenerated.
 
 No `RUBYGEMS_API_KEY` — Trusted Publishers handle auth.
 
-## Tone for this repo
-
-Same as the umbrella: terse, casual, status-emoji summaries.
