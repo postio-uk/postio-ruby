@@ -6,6 +6,16 @@ follows [SemVer](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-05-02
+
+### Changed
+
+- Drop the SPEC DRIFT block on `PhoneResult`. postio-api 1.0.3 aligned
+  the spec with the runtime — `is_reachable` is bool|nil, and the
+  runtime now always emits explicit nulls for every nullable field.
+  The hash-lookup `.from_hash` already handled either shape, so no
+  consumer-visible change.
+
 ## [0.1.0] — 2026-05-02
 
 Initial release. First Postio Ruby SDK on RubyGems.
@@ -35,5 +45,6 @@ Initial release. First Postio Ruby SDK on RubyGems.
   live API returns booleans there even though the spec says
   string-only. Aligned once postio-api ships a spec/runtime fix.
 
-[Unreleased]: https://github.com/postio-uk/postio-ruby/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/postio-uk/postio-ruby/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/postio-uk/postio-ruby/releases/tag/v0.1.1
 [0.1.0]: https://github.com/postio-uk/postio-ruby/releases/tag/v0.1.0

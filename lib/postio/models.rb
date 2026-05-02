@@ -109,13 +109,6 @@ module Postio
     end
 
     # PhoneResult — validation verdict for one phone number.
-    #
-    # SPEC DRIFT (2026-05-02): the OpenAPI spec marks every nullable
-    # field as required, but on invalid input the live API drops them
-    # entirely. The .from_hash fetcher uses h["..."] which returns nil
-    # for missing keys, papering over the drift. Also: spec says
-    # is_reachable is string|null, but the live API returns bool — we
-    # accept either.
     PhoneResult = Data.define(
       :number, :is_valid, :is_possible, :type, :country_code, :country_name,
       :national_format, :international_format, :e164_format, :original_carrier,

@@ -60,12 +60,14 @@ Local dev picks up `~/PROJECTS/ONNO/POSTIO/.env` via `set -a && source
   https://rubygems.org/profile/oidc/api_key_roles
   Bind to `(postio-uk/postio-ruby, release.yml, environment: rubygems)`.
 
-## Spec drift
+## Spec ↔ runtime alignment
 
-`PhoneResult` carries the same drift handling as the other SDKs: every
-nullable field defaults to `nil` (handled by hash lookup returning
-`nil` for missing keys), and `is_reachable` accepts either bool or
-string. Reapply if model is regenerated.
+As of postio-api 1.0.3 the OpenAPI spec and runtime are aligned —
+`PhoneResult` is a clean mirror of the spec. The live API now always
+emits explicit nulls for every field (no missing-key fallbacks needed)
+and `is_reachable` is bool|nil only. If a future spec change
+re-introduces drift, prefer fixing it at the source (postio-api Zod
+schemas + handlers) over patching downstream.
 
 ## Secrets the CI needs
 
