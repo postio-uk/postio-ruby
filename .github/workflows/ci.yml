@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [stage, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["3.1", "3.2", "3.3"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Build gem (sanity)
+        run: gem build postio.gemspec
+
+      - name: RSpec (offline)
+        run: bundle exec rspec
+
+  live-test:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Live tests against stage
+        env:
+          POSTIO_API_KEY_STAGE: ${{ secrets.POSTIO_API_KEY_STAGE }}
+        run: bundle exec rspec spec/live_spec.rb --tag live
