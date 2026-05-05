@@ -4,9 +4,11 @@
 [![Ruby](https://img.shields.io/badge/ruby-%3E%3D%203.1-red)](https://rubygems.org/gems/postio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Ruby SDK for the [Postio API](https://postio.co.uk) — UK address, email, and
-phone validation. Backed by Royal Mail PAF and Ordnance Survey. Stdlib
-`net/http` only, zero runtime dependencies.
+Ruby SDK for [Postio](https://postio.co.uk) — the UK validation API for
+addresses, emails and phone numbers. Stdlib `net/http` only, zero runtime
+dependencies. Backed by Royal Mail PAF and Ordnance Survey.
+
+> **First time?** [Sign up free](https://postio.co.uk) — first 100 lookups on us, no card needed.
 
 ## Install
 
@@ -27,7 +29,7 @@ Requires Ruby 3.1+.
 ```ruby
 require "postio"
 
-client = Postio::Client.new(api_key: "pk_live_...")  # or set POSTIO_API_KEY
+client = Postio::Client.new(api_key: "pk_...")  # or set POSTIO_API_KEY
 
 result = client.address.search("downing street")
 result.results.each do |hit|
@@ -84,7 +86,7 @@ the raw `envelope`.
 
 ```ruby
 client = Postio::Client.new(
-  api_key:  "pk_live_...",
+  api_key:  "pk_...",
   base_url: "https://api.postio.co.uk/v1",  # default
   timeout:  10,                              # seconds
   retries:  2,                               # 0 to disable

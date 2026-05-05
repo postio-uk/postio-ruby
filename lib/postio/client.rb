@@ -13,7 +13,7 @@ module Postio
   #
   # Example:
   #
-  #   client = Postio::Client.new(api_key: "pk_live_...")
+  #   client = Postio::Client.new(api_key: "pk_...")
   #   r = client.address.search("downing street")
   #   r.results.each { |hit| puts "#{hit.udprn}: #{hit.suggestion}" }
   #

@@ -7,7 +7,7 @@ require_relative "postio/client"
 
 # Top-level Postio module. Use Postio::Client to construct the API client.
 #
-#   client = Postio::Client.new(api_key: "pk_live_...")
+#   client = Postio::Client.new(api_key: "pk_...")
 #   client.address.search("downing street")
 module Postio
 end
